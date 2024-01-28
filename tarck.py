@@ -104,7 +104,7 @@ class track:
         recorder = Thread(target=videoRecorder)
         recorder.start()
         
-        while me.get_height() < 200:
+        while me.get_height() < 150:
             me.send_rc_control(0,10,10,0)
             me.send_rc_control(0,0,0,0)
         while me.get_height() > 50:

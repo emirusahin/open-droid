@@ -27,7 +27,7 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
 
 # 0 means fly and 1 for testing
 fight = 0
-rotate = 1
+rotate = 3
 
 me = Tello()
 me.connect(wait_for_state=True)
@@ -43,7 +43,7 @@ print(me.get_battery)
 if fight == 0:
         me.takeoff()
         time.sleep(2)
-        me.send_rc_control(0,0,30,0)
+        me.send_rc_control(0,0,50,0)
         time.sleep(3)
         me.send_rc_control(0,0,0,0)
         fight == 0
@@ -90,6 +90,13 @@ while True:
                 # Confidence
                 confidence = math.ceil((box.conf[0] * 100)) / 100
 
+                # Class name and details
+                org = [x1, y1]
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                fontScale = 1
+                color = (255, 0, 0)
+                thickness = 2
+
                 # Print the quadrant information
                 quadrant_num = 0
                 
@@ -120,8 +127,9 @@ while True:
                     track.rotate(me = me, qudrant = quadrant_num)
                 elif quadrant_num !=5 and quadrant_num != None and rotate == 1:
                     track.follow(me = me, qudrant = quadrant_num)
-                else:
-                    track.sling_shot(me = me, qudrant = quadrant_num)
+                                    
+                cv2.putText(img, f"{quadrant_num}", org, font, fontScale, color, thickness)
+                # if roation_follow == 0 and quadrant_num != 5:
                 
     cv2.imshow('MyResult', img)
     
