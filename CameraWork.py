@@ -8,21 +8,6 @@ class CameraApp:
         self.window = window
         self.window.title(window_title)
 
-        # Add an opening animation screen
-        self.opening_screen = tk.Canvas(window, bg="white", width=600, height=400)
-        self.opening_screen.pack(fill=tk.BOTH, expand=True)
-
-        # Schedule the opening of the camera after 2 seconds
-        self.window.after(2000, self.transition_to_camera)
-
-        self.vid = None  # Initialize vid variable
-
-        self.window.mainloop()
-
-    def transition_to_camera(self):
-        # Remove the opening screen
-        self.opening_screen.destroy()
-
         # Initialize camera and canvas for video feed
         self.video_source = 0
         self.vid = cv2.VideoCapture(self.video_source)
@@ -38,6 +23,8 @@ class CameraApp:
 
         # Update the camera feed
         self.update_camera()
+
+        self.window.mainloop()
 
     def create_buttons(self):
         # Create five buttons labeled Button One through Button Five
@@ -136,7 +123,6 @@ class CameraApp:
 
         # Close the settings window after saving
         settings_window.destroy()
-
 
 root = tk.Tk()
 app = CameraApp(root, "Camera App")
