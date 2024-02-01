@@ -27,7 +27,7 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
 
 # 0 means fly and 1 for testing
 fight = 0
-rotate = 3
+rotate = 1
 
 me = Tello()
 me.connect(wait_for_state=True)
